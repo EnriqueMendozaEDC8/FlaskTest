@@ -15,10 +15,38 @@
         <div class="row">
             <h1>Backend Python Test</h1>
         </div>
+        <div class="alert alert-black" role="alert">
+            <h4 class="alert-heading">How prepare header</h4>
+            <p>
+                URL: http://127.0.0.1:5000/getsecretkey<br>
+                Param: {}
+            </p>
+            <hr>
+            <p class="mb-0">response:<br>
+                {
+                    "key": "SmdmQ1ZQNzItNmdjZTRhNkgtdExHQQ=="
+                }
+            </p>
+            <hr>
+            <p class="mb-0">Request:<br>
+                URL: http://127.0.0.1:5000/getresponsekey<br>
+                {
+                    "key": "SmdmQ1ZQNzItNmdjZTRhNkgtdExHQQ==",
+                    "user":"AnyUser"
+                }
+            </p>
+            <hr>
+            <p class="mb-0">Response:<br>
+                {
+                    "key": "U21kbVExWlFOekl0Tm1kalpUUmhOa2d0ZEV4SFFRPT1VU0VSOmVucmlxdWU="
+                }<br>
+                And set on header the key
+            </p>
+        </div>
         <div class="alert alert-success" role="alert">
             <h4 class="alert-heading">Get Method</h4>
             <p>
-                URL: http://165.227.25.5:5000/getuser<br>
+                URL: http://127.0.0.1:5000/getuser<br>
                 Param: {}
             </p>
             <hr>
@@ -48,7 +76,7 @@
         <div class="alert alert-warning" role="alert">
             <h4 class="alert-heading">Post Method</h4>
             <p>
-                URL: http://165.227.25.5:5000/postuser<br>
+                URL: http://127.0.0.1:5000/postuser<br>
                 Param: {
                     "id":1
                 }
@@ -69,7 +97,7 @@
         <div class="alert alert-info" role="alert">
             <h4 class="alert-heading">Put Method</h4>
             <p>
-                URL: http://165.227.25.5:5000/putuser<br>
+                URL: http://127.0.0.1:5000/putuser<br>
                 Param: {
                     "name":"samantha zamora",
                     "birthdate":"1994-11-22",
@@ -86,7 +114,7 @@
         <div class="alert alert-danger" role="alert">
             <h4 class="alert-heading">Delete Method</h4>
             <p>
-                URL: http://165.227.25.5:5000/deleteuser<br>
+                URL: http://127.0.0.1:5000/deleteuser<br>
                 Param: {
                     "id":3
                 }

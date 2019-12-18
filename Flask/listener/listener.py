@@ -7,7 +7,7 @@ import os,secrets,base64,json
 #   @param 
 #   @return json user,key
 def uncryptedpKey(encryptedkey):
-    decodeKeyAndUser = base64.b64decode(request.headers.get('key')).decode("utf-8")
+    decodeKeyAndUser = base64.b64decode(request.headers.get('Key')).decode("utf-8")
     splittedCode = decodeKeyAndUser.split('USER:')
     return {'user':splittedCode[1],'key':base64.b64decode(splittedCode[0]).decode("utf-8")}
 
@@ -24,7 +24,7 @@ def index():
 @app.route("/getuser",methods = ['GET'])
 def getuser():
     try:
-        jsonKey = uncryptedpKey(request.headers.get('key'))
+        jsonKey = uncryptedpKey(request.headers.get('Key'))
         if(jsonKey['key'] == app.secret_key):
             response = model.get_users()
             return jsonify({'data':response})
@@ -38,7 +38,7 @@ def getuser():
 @app.route("/postuser",methods = ['POST'])
 def postuser():
     try:
-        jsonKey = uncryptedpKey(request.headers.get('key'))
+        jsonKey = uncryptedpKey(request.headers.get('Key'))
         if(jsonKey['key'] == app.secret_key):
             idUser = request.json.get('id')
             response = model.get_one_user(idUser)
@@ -53,7 +53,7 @@ def postuser():
 @app.route("/putuser", methods=['PUT'])
 def putuser():
     try:
-        jsonKey = uncryptedpKey(request.headers.get('key'))
+        jsonKey = uncryptedpKey(request.headers.get('Key'))
         if(jsonKey['key'] == app.secret_key):
             name = request.json.get('name')
             birthdate = request.json.get('birthdate')
@@ -70,7 +70,7 @@ def putuser():
 @app.route("/deleteuser", methods=['DELETE'])
 def deleteuser():
     try:
-        jsonKey = uncryptedpKey(request.headers.get('key'))
+        jsonKey = uncryptedpKey(request.headers.get('Key'))
         if(jsonKey['key'] == app.secret_key):
             idUser = request.json.get('id')
             response = model.delete_user(idUser)

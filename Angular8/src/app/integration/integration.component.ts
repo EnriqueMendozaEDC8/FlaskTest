@@ -10,13 +10,25 @@ import { FlaskserviceService } from '../flaskservice.service';
 export class IntegrationComponent implements OnInit {
   users: any[] = [];
   postUsers: any[] = [];
+  key = '';
+  user = 'enrique';
   constructor(protected FlaskserviceService:FlaskserviceService) { }
 
-  ngOnInit() {
-    this.FlaskserviceService.getUser()
+  async ngOnInit() {
+    await this.FlaskserviceService.getkey()
     .subscribe(
       (data) =>{
-        this.users = [data['data']];
+        this.key = this.FlaskserviceService.createReturnedKey(data['key'],this.user);
+        this.FlaskserviceService.getUser(this.key)
+        .subscribe(
+          (data) =>{
+            this.users = [data['data']];
+          },
+          (error) => {
+            console.error(error);
+            alert("we have some error");
+          }
+        );
       },
       (error) => {
         console.error(error);
@@ -26,7 +38,7 @@ export class IntegrationComponent implements OnInit {
   }
   onClickDoPost(formData) {
     const data ={'id':formData.id};
-    this.FlaskserviceService.postUser(data)
+    this.FlaskserviceService.postUser(data,this.key)
     .subscribe(
       (data) =>{
         this.postUsers = [data['data']];
@@ -42,7 +54,7 @@ export class IntegrationComponent implements OnInit {
       'birthdate':formData.date,
       'job':formData.job,
     };
-    this.FlaskserviceService.putUser(data)
+    this.FlaskserviceService.putUser(data,this.key)
     .subscribe(
       (data) =>{
         this.ngOnInit();
@@ -54,7 +66,7 @@ export class IntegrationComponent implements OnInit {
   }
   onClickDoDelete(formData) {
     const data ={'id':formData.id};
-    this.FlaskserviceService.deleteUser(data)
+    this.FlaskserviceService.deleteUser(data,this.key)
     .subscribe(
       (data) =>{
         this.ngOnInit();
